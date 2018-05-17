@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>The Bet</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="./main.css" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <div class="main-content">
+            <div class="header">
+                <div class="title">
+                    <h1>The Bet</h1>
+                </div>
+                <div class="sub-title">
+                    <span class="label">Record the bets on blockchain.</span>
+                </div>
+            </div>
+            <div class="row clearfix search-memories">
+                <div class="input-group col-md-3 search-condition">
+                    <input type="text" class="form-control" placeholder="请输入日期" id='datetime'/>
+                    <span class="input-group-btn">
+                        <button class="btn btn-info btn-search" id="search">查找</button>
+                        <button class="btn btn-info btn-add" id="add">新增</button>
+                    </span>
+                </div>
+                <div class="search-results">
+                    <ul id="itemList">
+                    </ul>
+                </div>
+                <div class="new-memory">
+                    <div class="input-group col-md-8 new-date">
+                        <span class="input-group-addon">日期</span>
+                        <input type="text" class="form-control" id="input_title" disabled>
+                    </div>
+                    <div class="input-group col-md-8 new-content">
+                        <span class="input-group-addon">内容</span>
+                        <input type="text" class="form-control" placeholder="今天有什么特别" id=input_content>
+                    </div>
+                    <div class="new-submit">
+                        <button class="btn btn-info" id="post">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <script type="text/javascript" src="./libs/nebulas.js"></script>
+    <script type="text/javascript" src="./libs/nebPay.js"></script>
+    <script type="text/javascript" src="./libs/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="./index.js"></script>
+
+</html>

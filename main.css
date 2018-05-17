@@ -1,0 +1,83 @@
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+.main-content {
+    background-image: url("./img/bg4.jpg");
+    height: 100%;
+}
+.header {
+    text-align: center;
+    padding-top: 10px;
+}
+.title {
+    color: white;
+}
+.sub-title {
+    margin-top: 10px;
+    font-size: 20px;
+}
+.icon-xingyun {
+    margin-top: 0px;
+}
+.icon-xingyun span img {
+    width: 180px;
+}
+.search-condition {
+    position: absolute;
+    margin-top: 0px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.search-condition .btn-add {
+    margin-left: 20px !important;
+    border-radius: 5px !important;
+}
+.search-condition .btn-search {
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+}
+.search-results {
+    display: none;
+}
+.search-results ul {
+    list-style: none;
+    padding: 0 20px;
+    color: white;
+    border: 1px solid #4869;
+    padding-top: 10px;
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    background-color: #334e83;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+.search-results ul li {
+    margin-bottom: 5px;
+    padding: 5px;
+    border-bottom: 1px solid #4869;
+}
+.search-results ul li .item-author {
+    margin: 0;
+    font-size: 12px;
+}
+.new-memory {
+    display: initial;
+}
+.new-memory .new-date {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+}
+.new-memory .new-content {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+.new-memory .new-submit {
+    position: absolute;
+    right: 300px;
+    padding-top: 30px;
+}
