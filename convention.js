@@ -97,12 +97,9 @@ ContractItems.prototype ={
     },
 
     getInfo:function(){
-        var info
+        var info = [];
         for(var i = 0; i < this.size; i++){
-            info += this.data.get(i)
-            if(i != this.size - 1){
-                info += "#"
-            }
+            info.push(this.data.get(i));
         }
         return info;
     }

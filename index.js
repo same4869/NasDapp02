@@ -14,6 +14,18 @@ $(function () {
 
     /******************* config environment end *******************/
 
+
+    // set newest 3 bets in left part
+    var html = '';
+    var topList = result.itemList;
+    for(var i = 0, iLen = itemList.length; i < iLen; i++) {
+        html += '<li>' +
+                '<p class="item-content">'+ itemList[i].content +'</p>' +
+                '<p class="item-author">作者：'+ itemList[i].author +'</p>' +
+                '</li>';
+    }
+    $('#itemList').append(html);
+
     var NebPay = require("nebpay");     //https://github.com/nebulasio/nebPay
     var nebPay = new NebPay();
     var serialNumber;
