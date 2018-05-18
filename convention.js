@@ -97,9 +97,10 @@ ContractItems.prototype ={
     },
 
     getInfo:function(){
-        var info = [];
+        this.size = LocalContractStorage.get("id", this.size);
+        var info = []
         for(var i = 0; i < this.size; i++){
-            info.push(this.data.get(i));
+            info.push(this.data.get(i))
         }
         return info;
     }
