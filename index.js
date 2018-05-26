@@ -1,94 +1,116 @@
-"use strict";
-$(function () {  
-    /******************* config environment *******************/
-
-    //test net for develop, remove the comment to use test net
-    var dappContactAddress = "n1rYbwxEFn78nFWHnSgjybxK1Kc1iem2GaZ";
-    var nebulas = require("nebulas"), Account = Account, neb = new nebulas.Neb();
-    neb.setRequest(new nebulas.HttpRequest("https://testnet.nebulas.io"));
-
-    //main net for deploy, comment out this when develop
-    // var dappContactAddress = "n1rMRGPsJdoS7jXcfwCCjEMKnm56jtMoQeL";
-    // var nebulas = require("nebulas"), Account = Account, neb = new nebulas.Neb();
-    // neb.setRequest(new nebulas.HttpRequest("https://mainnet.nebulas.io"));
-
-    /******************* config environment end *******************/
-
-
-    // set newest 3 bets in left part
-    var html = '';
-    var topList = result.itemList;
-    for(var i = 0, iLen = itemList.length; i < iLen; i++) {
-        html += '<li>' +
-                '<p class="item-content">'+ itemList[i].content +'</p>' +
-                '<p class="item-author">作者：'+ itemList[i].author +'</p>' +
-                '</li>';
-    }
-    $('#itemList').append(html);
-
-    var NebPay = require("nebpay");     //https://github.com/nebulasio/nebPay
-    var nebPay = new NebPay();
+$(function () {
+    var dappContactAddress;
     var serialNumber;
-    $("#search").click(function () {
-        if (!$("#datetime").val()) {
-            alert('搜索日期不能为空');
-            return;
+    var NebPay;
+    var nebPay;
+    var nebulas;
+    dappContactAddress = "n1xe9kapHn2FABVUPU7CULCk4ntBYjhdPVC";
+    nebulas = require("nebulas"), neb = new nebulas.Neb();
+    neb.setRequest(new nebulas.HttpRequest("https://testnet.nebulas.io"));
+    
+    NebPay = require("nebpay");     //https://github.com/nebulasio/nebPay
+    nebPay = new NebPay();	
+    var myneb = new Neb();
+    var nasApi = myneb.api;	
+
+    var curWallectAdd;
+
+
+    function getWallectInfo() {
+        console.log("getWallectInfo");
+        window.addEventListener('message', getMessage);
+    
+        window.postMessage({
+            "target": "contentscript",
+            "data": {},
+            "method": "getAccount",
+        }, "*");
+    }
+    
+    function getMessage(e){
+        if (e.data && e.data.data) {
+            console.log("e.data.data:", e.data.data)
+            if (e.data.data.account) {
+                var address = e.data.data.account;
+                curWallectAdd = address;
+                console.log("address="+address);
+            }
         }
-        // $('#content').text("");
+       
+    }
+
+
+    function getInfo(){
         var from = dappContactAddress;
         var value = "0";
         var nonce = "0";
         var gas_price = "1000000";
         var gas_limit = "20000000";
-        var callFunction = "get";
-        var callArgs = "[\"" + $("#datetime").val() + "\"]";
-        //console.log("callFunction:" + callFunction + " callArgs:" + callArgs);
+        var callFunction = "getInfo";
+        var callArgs = "";
+        console.log("callFunction:" + callFunction + " callArgs:" + callArgs);
         var contract = {
-            "function": callFunction,
-            "args": callArgs
+        "function": callFunction,
+        "args": callArgs
         };
-        neb.api.call(from, dappContactAddress, value, nonce, gas_price, gas_limit, contract).then(function (resp) {
-            var result = resp.result;   
-            if (result === 'null') {
-                $('.search-results').text("今天还没有人记录，来当第一名吧");
-                return;
-            }
-            result = JSON.parse(result);
-            console.log(result);
-            $(".search-results").css("display", "initial");
-            $(".new-memory").css("display", "none");
-            $("#itemList").empty();
-            var html = '';
-            var itemList = result.itemList;
-            for(var i = 0, iLen = itemList.length; i < iLen; i++) {
-                html += '<li>' +
-                        '<p class="item-content">'+ itemList[i].content +'</p>' +
-                        '<p class="item-author">作者：'+ itemList[i].author +'</p>' +
-                        '</li>';
-            }
-            $('#itemList').append(html);
-        }).catch(function (err) {
-            console.log("error :" + err.message);
-        })
-    });
-    $('#post').click(function () {
-        if (!$("#input_title").val() || !$("#input_content").val()) {
-            alert('时间或者内容不能为空');
-            return;
+    neb.api.call(from, dappContactAddress, value, nonce, gas_price, gas_limit, contract).then(function (resp) {
+        var result = resp.result;   
+        console.log("result : " + result);
+        result = JSON.parse(result);
+        setItemsProperties(result);
+    }).catch(function (err) {
+        console.log("error :" + err.message);
+    })
+        getWallectInfo()
+   }
+
+   function setItemsProperties(itemList) {
+        console.log(itemList);
+        var html = "";
+        for(var i = 0, iLen = itemList.length; i < iLen; i++) {
+            randomIndex = (i + 1) % 30;
+            // var i = Math.random();
+            // var randomIndex = Math.ceil(i*30);
+            console.log("randomIndex:" + randomIndex);
+            // randomIndex = 1;
+            html += 
+            '<div class="item">' + 
+				'<div class="example-image-link" data-lightbox="example-set" data-title="Click the right half of the image to move forward."><img class="example-image" src="images/' + randomIndex + '.jpg" alt=""/></div>' + 
+				'<div class="content-item">' + 
+					'<h3 class="title-item"><a href="single.html?page='+i+'">' + itemList[i].title+ '</a></h3>' + 
+					'<div class="time"> '+ itemList[i].date +'</div>' + 
+					'<p class="info">'+itemList[i].content+'</p>	' + 	
+				'</div>' + 
+				'<div class="bottom-item">' + 
+					// '<a href="#" class="btn btn-share share"><i class="fa fa-share-alt"></i> Share</a>' + 
+					// '<a href="#" class="btn btn-like"><i class="fa fa-heart-o"></i></a>' +
+					// '<a href="#" class="btn btn-comment"><i class="fa fa-comment-o"></i></a>' +
+					'<a href="single.html?page='+i+'" class="btn btn-more"><i class="fa fa-long-arrow-right "></i></a>' +
+				'</div>' + 
+			'</div>';
+
+            console.log(html);
         }
-        var to = dappContactAddress;
-        var value = "0";
-        var callFunction = "save";
-        var callArgs = "[\"" + $("#input_title").val() + "\",\"" + $("#input_content").val() + "\"]";
-        console.log(callArgs);
-        serialNumber = nebPay.call(to, value, callFunction, callArgs, {    //使用nebpay的call接口去调用合约,
-            listener: function (resp) {
-                console.log("thecallback is " + resp)
-            }
-        });
+        $('#container').append(html);
+   }
+
+    $(".market_page .button.small.yellow").on("click", function(event) {
+        var currentIndex = event.currentTarget.id;
+        console.log("currentIndex:" + currentIndex + " text:" + $(".market_page .button.small.yellow span")[currentIndex].innerHTML);
+        if($(".market_page .button.small.yellow span")[currentIndex].innerHTML === "求赠送"){
+            bootbox.prompt("请给对方填写1个赠送给你的理由~", function(result){
+                console.log(result); 
+                if(result !== null && result !== ""){
+                   var currentIndex = event.currentTarget.id;
+                   console.log("currentIndex:" + currentIndex);
+                   requestAHuluwa(currentIndex, result);
+                }
+           });
+        }else{
+            ownAHuluwa(currentIndex);
+        }
     });
-    $("#add").click(function () {
-        $(".search-results").css("display", "none");
-        $(".new-memory").css("display", "initial");
-    });
-});
+
+    getInfo();
+
+})

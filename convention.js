@@ -3,6 +3,7 @@ var ContractItem = function(text){
     if(text){
        var obj = JSON.parse(text);
        this.id = obj.id;
+       this.title = obj.title;
        this.date = obj.date;
        this.author = obj.author;
        this.content = obj.content;
@@ -34,7 +35,8 @@ ContractItems.prototype ={
         this.size = 0
     },
 
-    add:function(date,content){
+    //新增一个活动邀约
+    addANew:function(date,title,content){
         if(!content){
             throw new Error("内容不能为空")
         }
@@ -51,6 +53,7 @@ ContractItems.prototype ={
            id = LocalContractStorage.get("id");
         }
         newContractItem.id = id;
+        newContractItem.title = title;
         newContractItem.date = date;
         newContractItem.author = from;
         newContractItem.content = content;
@@ -65,7 +68,7 @@ ContractItems.prototype ={
         return this.size;
     },
 
-    get:function(id){
+    getById:function(id){
         if(!id){
             throw new Error("empty id")
         }
@@ -81,6 +84,7 @@ ContractItems.prototype ={
         return LocalContractStorage.get("id");
     },
 
+    //其他人参与这个活动，加入活动名单
     addOther:function(id){
         var from = Blockchain.transaction.from;
         var contractItem = this.data.get(id);
@@ -96,6 +100,7 @@ ContractItems.prototype ={
         }
     },
 
+    //所有活动邀约的内容
     getInfo:function(){
         this.size = LocalContractStorage.get("id", this.size);
         var info = []

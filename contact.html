@@ -7,8 +7,7 @@
     <meta name="description" content="Free Bootstrap Themes by Html5xCss3 dot com - Free Responsive Html5 Templates">
     <meta name="author" content="#">
 	
-    <title>星云链上的活动邀约</title>
-	
+    <title>活动邀约-新增活动邀约</title>
 	
 	<link rel="stylesheet" href="css/menu.css">
 	
@@ -19,6 +18,7 @@
     <link rel="stylesheet" href="font-awesome-4.4.0/css/font-awesome.min.css"  type="text/css">
 	
 	<link rel="stylesheet" href="css/lightbox.css">
+	<link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet"> 
 	
 	<!-- Core JavaScript Files -->  	 
     
@@ -43,31 +43,43 @@
 			</ul>
 		</div>
 	</div>
-
-    <div class="copyrights">Collect from <a href="http://www.cssmoban.com/" >企业网站模板</a></div>
-	<div id="page-content" class="index-page">
-		<div id="container">
-			<!-- These are our grid blocks -->
-		
+	
+    <div id="page-content" class="sub-page">
+		<div class="container">
+			<center><article>
+				<h2 class="center">新增活动邀约</h2>
+				<div id="contact_form">
+					<div name="form1" id="ff">
+						<div>
+						<span>活动邀约主题:</span>
+						<input type="text"  name="name" id="activityName">
+						</div>
+						<div>
+						<span>活动邀约时间:</span>
+						<!-- <input type="text" class="form-control" placeholder="请输入日期" id='datetime'/> -->
+						<div class="time-picker-wrapper">
+							<input name="datetime" placeholder="请输入日期" id='activityTime'>
+						</div>
+					</div>
+						<div>
+						<span>活动邀约内容:</span>
+						<textarea name="message" id="activityContent"></textarea>
+						</div>
+						<center><input class="sendButton" type="submit" id="submitcontact" value="提交"></center>
+					</div>
+				</div>
+			</article></center>
 		</div>
 	</div>
-    
+	
     <!-- Once the page is loaded, initialized the plugin. -->
-    <script type="text/javascript" src="js/jquery-2.1.1.js" ></script>
-	
-	<!-- jQuery Pinterest -->
-    <script type="text/javascript" src="js/jquery.pinto.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
-	
-	<!-- Light Box -->
+	<script type="text/javascript" src="js/jquery-2.1.1.js" ></script>
 	<script src="js/lightbox-plus-jquery.min.js"></script>
-	
-	<!-- Menu -->
-	<script src="js/script.js"></script>
-
 	<script type="text/javascript" src="./dist/nebulas.js"></script>
 	<script type="text/javascript" src="./dist/nebPay.js"></script>
-	<script src="index.js"></script>
-	
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script src="https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js"></script> 
+    <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="contact.js"></script>
 </body>
 </html>
